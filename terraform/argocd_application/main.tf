@@ -22,12 +22,7 @@ resource "kubernetes_manifest" "argo_application" {
         chart          = var.chart
         path           = var.path
         directory = {
-          recursive = var.directory_recursive
-        }
-        helm = {
-          releaseName = var.release_name == null ? var.name : var.release_name
-          parameters  = local.helm_parameters
-          values      = yamlencode(merge({ labels = local.labels }, var.helm_values))
+          recurse = var.directory_recursive
         }
       }
       destination = {

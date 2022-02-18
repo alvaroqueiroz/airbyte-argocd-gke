@@ -119,10 +119,10 @@ module "argocd_application_git" {
   namespace           = "airbyte-namespace"
   repo_url            = var.airbyte_manifests_repo
   path                = "kube/manifests"
+  directory_recursive = true
   target_revision     = "HEAD"
   automated_self_heal = true
   automated_prune     = true
-  directory_recursive = true
 }
 
 # third apply for the entire file
