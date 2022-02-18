@@ -117,3 +117,9 @@ variable "labels" {
   description = ""
   default     = {}
 }
+
+variable "directory_recursive" {
+  type        = bool
+  description = "recursive search for files in the directory"
+  default     = false
+}

@@ -122,9 +122,7 @@ module "argocd_application_git" {
   target_revision     = "HEAD"
   automated_self_heal = true
   automated_prune     = true
-  labels = {
-    app = "airbyte"
-  }
+  directory_recursive = true
 }
 
 # third apply for the entire file
