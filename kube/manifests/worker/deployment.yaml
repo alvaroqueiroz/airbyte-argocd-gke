@@ -20,7 +20,7 @@ spec:
             limits:
               cpu: 2
               memory: 1Gi
-          image: airbyte/worker
+          image: airbyte/worker:0.35.30-alpha 
           env:
             - name: AIRBYTE_VERSION
               valueFrom:

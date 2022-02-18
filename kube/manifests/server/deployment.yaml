@@ -18,7 +18,7 @@ spec:
             limits:
               cpu: 1
               memory: 2Gi
-          image: airbyte/server
+          image: airbyte/server:0.35.30-alpha 
           env:
             - name: AIRBYTE_VERSION
               valueFrom:
