@@ -89,23 +89,28 @@ module "argocd" {
     "cert-manager.io/cluster-issuer"                 = "lets-encrypt"
   }
   server_insecure = true
-  repositories = [{
-    url  = "https://charts.bitnami.com/bitnami"
-    type = "helm"
+  repositories = [
+    # {
+    #   url      = var.airbyte_manifests_repo
+    #   username = "username"
+    #   password = "password"
+    # },
+    {
+      url  = "https://charts.bitnami.com/bitnami"
+      type = "helm"
   }]
 }
 module "argocd_application_git" {
   source = "./argocd_application"
 
-  argocd_namespace   = module.argocd.namespace
-  destination_server = "https://kubernetes.default.svc"
-  project            = "default"
-  name               = "airbyte"
-  namespace          = "airbyte-namespace"
-  repo_url           = "https://github.com/alvaroqueiroz/airbyte-argocd-gke.git"
-  chart              = ""
-  path               = "kube/manifests"
-  target_revision    = "master"
+  argocd_namespace    = module.argocd.namespace
+  destination_server  = "https://kubernetes.default.svc"
+  project             = "default"
+  name                = "airbyte"
+  namespace           = "airbyte-namespace"
+  repo_url            = var.airbyte_manifests_repo
+  path                = "kube/manifests"
+  target_revision     = "master"
   automated_self_heal = true
   automated_prune     = true
   labels = {

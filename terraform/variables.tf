@@ -18,6 +18,10 @@ variable "project_id" {
   description = "The project ID to host the cluster in"
 }
 
+variable "airbyte_manifests_repo" {
+  description = "The repo that contains the manifests for Airbyte in the folder kube/manifests"
+}
+
 variable "cluster_name" {
   description = "The name for the GKE cluster"
   default     = "gke-on-vpc-cluster"

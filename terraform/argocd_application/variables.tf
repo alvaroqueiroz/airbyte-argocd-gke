@@ -14,6 +14,7 @@ variable "target_revision" {
 variable "chart" {
   type        = string
   description = "The name of the Helm chart"
+  default     = ""
 }
 variable "path" {
   type        = string
