@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: airbyte-scheduler-container
-          resources:
-            limits:
-              cpu: 2
-              memory: 512Mi
+          # resources:
+          #   limits:
+          #     cpu: 2
+          #     memory: 512Mi
           image: airbyte/scheduler:0.35.30-alpha 
           env:
             - name: AIRBYTE_VERSION

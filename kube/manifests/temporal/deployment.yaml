@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: airbyte-temporal
-          resources:
-            limits:
-              cpu: 2
-              memory: 512Mi
+          # resources:
+          #   limits:
+          #     cpu: 2
+          #     memory: 512Mi
           image: temporalio/auto-setup:1.7.0
           env:
             - name: POSTGRES_USER

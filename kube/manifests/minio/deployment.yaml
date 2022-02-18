@@ -23,10 +23,10 @@ spec:
             claimName: airbyte-minio-pv-claim
       containers:
         - name: airbyte-minio
-          resources:
-            limits:
-              cpu: 1
-              memory: 512Mi
+          # resources:
+          #   limits:
+          #     cpu: 1
+          #     memory: 512Mi
           # Pulls the default Minio image from Docker Hub
           image: minio/minio:latest
           args:

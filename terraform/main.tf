@@ -77,6 +77,8 @@ resource "null_resource" "connnect_to_gke_cluster" {
   depends_on = [module.gke]
 }
 
+# first apply should end here
+
 module "argocd" {
   source     = "./argocd"
   depends_on = [module.gke, resource.null_resource.connnect_to_gke_cluster]
@@ -95,11 +97,18 @@ module "argocd" {
     #   username = "username"
     #   password = "password"
     # },
+    # {
+    #     url          = var.airbyte_manifests_repo
+    #     access_token = "access_token"
+    # },
     {
-      url  = "https://charts.bitnami.com/bitnami"
-      type = "helm"
-  }]
+        url  = "https://charts.bitnami.com/bitnami"
+        type = "helm"
+    }]
 }
+
+# second apply must end here
+
 module "argocd_application_git" {
   source = "./argocd_application"
 
@@ -110,10 +119,12 @@ module "argocd_application_git" {
   namespace           = "airbyte-namespace"
   repo_url            = var.airbyte_manifests_repo
   path                = "kube/manifests"
-  target_revision     = "master"
+  target_revision     = "HEAD"
   automated_self_heal = true
   automated_prune     = true
   labels = {
     app = "airbyte"
   }
 }
+
+# third apply for the entire file

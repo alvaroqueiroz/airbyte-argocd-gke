@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: airbyte-db-container
-          resources:
-            limits:
-              cpu: 2
-              memory: 2Gi
+          # resources:
+          #   limits:
+          #     cpu: 2
+          #     memory: 2Gi
           image: airbyte/db:0.35.30-alpha 
           env:
             - name: POSTGRES_DB

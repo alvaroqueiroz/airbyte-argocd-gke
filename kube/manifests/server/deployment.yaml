@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: airbyte-server-container
-          resources:
-            limits:
-              cpu: 1
-              memory: 2Gi
+          # resources:
+          #   limits:
+          #     cpu: 1
+          #     memory: 2Gi
           image: airbyte/server:0.35.30-alpha 
           env:
             - name: AIRBYTE_VERSION
