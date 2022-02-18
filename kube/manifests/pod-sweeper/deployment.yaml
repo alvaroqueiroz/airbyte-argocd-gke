@@ -15,6 +15,10 @@ spec:
       serviceAccountName: airbyte-admin
       containers:
         - name: airbyte-pod-sweeper
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 128Mi
           image: bitnami/kubectl
           imagePullPolicy: IfNotPresent
           env:

@@ -16,6 +16,10 @@ spec:
       automountServiceAccountToken: true
       containers:
         - name: airbyte-worker-container
+          resources:
+            limits:
+              cpu: 2
+              memory: 1Gi
           image: airbyte/worker
           env:
             - name: AIRBYTE_VERSION

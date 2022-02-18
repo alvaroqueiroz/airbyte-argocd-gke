@@ -14,6 +14,10 @@ spec:
     spec:
       containers:
         - name: airbyte-webapp-container
+          resources:
+            limits:
+              cpu: 1
+              memory: 512Mi
           image: airbyte/webapp
           env:
             - name: AIRBYTE_VERSION
