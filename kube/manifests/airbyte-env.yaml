@@ -7,6 +7,7 @@ metadata:
     helm.sh/hook-weight: '-1'
 data:
   AIRBYTE_VERSION: 0.35.30-alpha
+  LOG_LEVEL: INFO
   API_URL: /api/v1/
   AWS_ACCESS_KEY_ID: minio
   AWS_SECRET_ACCESS_KEY: minio123
