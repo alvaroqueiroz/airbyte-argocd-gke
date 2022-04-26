@@ -56,6 +56,27 @@ module "gcp-network" {
   ]
 }
 
+module "postgresql" {
+  source           = "./postgresql"
+  project_id       = var.project_id
+  name             = "airbyte-metastore"
+  database_version = "POSTGRES_9_6"
+  region           = var.region
+  tier             = "db-f1-micro"
+  db_name          = "db-airbyte"
+  user_name        = "airbyte"
+  user_password    = "airbyte"
+  ip_configuration = [{
+    ipv4_enabled = true
+
+    authorized_networks = [{
+      name  = module.gcp-network.network_name
+      value = module.gcp-network.default.ip_cidr_range
+    }]
+  }]
+  module_depends_on = module.gcp-network
+}
+
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
   project_id                 = var.project_id
@@ -102,12 +123,13 @@ module "argocd" {
     #     access_token = "access_token"
     # },
     {
-        url  = "https://charts.bitnami.com/bitnami"
-        type = "helm"
-    }]
+      url  = "https://charts.bitnami.com/bitnami"
+      type = "helm"
+  }]
 }
 
 # second apply must end here
+# before appling this part, you need to update the manifest file airbyte-env with the postgresql host
 
 module "argocd_application_git" {
   source = "./argocd_application"
@@ -123,6 +145,9 @@ module "argocd_application_git" {
   target_revision     = "HEAD"
   automated_self_heal = true
   automated_prune     = true
+  depends_on = [
+    module.postgresql
+  ]
 }
 
 # third apply for the entire file
